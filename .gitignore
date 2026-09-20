@@ -1,0 +1,48 @@
+# This repo is public. Only index.html and README.md belong in it.
+# Everything below is a server document that must never be published.
+
+# Documentation from the Game Server folder
+CLAUDE.md
+HANDOFF.md
+HOST.md
+RUNBOOK.md
+PIPELINE.md
+VALHEIM.md
+PALWORLD.md
+SELFHOST-HISTORY.md
+SERVERSIDEQOL-MODULES.md
+server-changes/
+host/
+Palworld/
+Valheim/
+memory/
+
+# Server state, saves, configs, backups, keys
+*.cfg
+*.acf
+*.db
+*.db2
+*.fwl
+*.fwl2
+*.sav
+*.yml
+*.yaml
+*.log
+*.tar
+*.tar.gz
+*.zip
+*.bak
+*.bak-*
+*.pem
+*.key
+id_*
+.env
+*.service
+*.timer
+
+# Local junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+__pycache__/

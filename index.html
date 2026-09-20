@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Server-only mod picklist for the Fjordnite Valheim server.">
+<meta name="color-scheme" content="light dark">
+<title>Fjordnite Mod Picklist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-bg: #E8EAF0;
+    --color-text: #1A1E2E;
+    --color-accent: #00C4A0;
+    --color-accent-2: #7C40CC;
+    --color-border: #C4C8D8;
+    --color-surface-card: #DDDFE8;
+    --color-surface-elevated: #D0D3DF;
+    --color-success: #00875A;
+    --color-warning: #C47000;
+    --color-danger: #CC2020;
+    --color-muted: #7080A0;
+    --color-hint: #7080A0;
+    --color-link: #008060;
+    --color-link-hover: #00C4A0;
+    --color-link-visited: #6030A0;
+    --radius-sm: 4px;
+    --radius-lg: 8px;
+    --transition: all 120ms ease-out;
+    --bar-track: #C4C8D8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --color-bg: #0D0E1A;
+      --color-text: #D4D8F0;
+      --color-accent: #00FFD0;
+      --color-accent-2: #A855F7;
+      --color-border: #1E2038;
+      --color-surface-card: #141628;
+      --color-surface-elevated: #1C1F38;
+      --color-success: #00E890;
+      --color-warning: #FFB830;
+      --color-danger: #FF4040;
+      --color-muted: #404880;
+      --color-hint: #A8B0D8;
+      --color-link: #00FFD0;
+      --color-link-hover: #80FFE8;
+      --color-link-visited: #A855F7;
+      --bar-track: #1E2038;
+    }
+  }
+  :root[data-theme="dark"] {
+    --color-bg: #0D0E1A;
+    --color-text: #D4D8F0;
+    --color-accent: #00FFD0;
+    --color-accent-2: #A855F7;
+    --color-border: #1E2038;
+    --color-surface-card: #141628;
+    --color-surface-elevated: #1C1F38;
+    --color-success: #00E890;
+    --color-warning: #FFB830;
+    --color-danger: #FF4040;
+    --color-muted: #404880;
+    --color-hint: #A8B0D8;
+    --color-link: #00FFD0;
+    --color-link-hover: #80FFE8;
+    --color-link-visited: #A855F7;
+    --bar-track: #1E2038;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: 'Exo 2', 'Segoe UI', system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+    margin: 0;
+  }
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-inline: 16px;
+    padding-block: 32px 64px;
+  }
+  h1, h2, h3 {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-wrap: balance;
+    margin: 0;
+  }
+  h1 { font-size: 1.9rem; font-weight: 700; line-height: 1.2; }
+  h2 { font-size: 1.05rem; font-weight: 600; color: var(--color-hint); }
+  p { max-width: 65ch; margin: 0 0 0.75em; }
+  a { color: var(--color-link); transition: var(--transition); }
+  a:hover { color: var(--color-link-hover); }
+  a:visited { color: var(--color-link-visited); }
+  a:focus-visible, input:focus-visible, button:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  header.head {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: 20px;
+    margin-bottom: 24px;
+  }
+  .eyebrow {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+  .lede { color: var(--color-text); }
+  .facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    font-size: 0.8rem;
+    color: var(--color-hint);
+  }
+  .fact { border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 0.15em 0.6em; }
+
+  .panel {
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .panel-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 16px; }
+  .count { font-size: 1.5rem; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--color-accent); }
+  #picks { margin: 0; font-size: 0.9rem; color: var(--color-text); display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; }
+  #picks li {
+    border: 1px solid var(--color-accent);
+    color: var(--color-accent);
+    border-radius: 999px;
+    padding: 0.1em 0.7em;
+    font-size: 0.78rem;
+  }
+  .empty { color: var(--color-hint); font-size: 0.9rem; }
+  .btnrow { display: flex; flex-wrap: wrap; gap: 8px; }
+  button {
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-bg);
+    background: var(--color-accent);
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 0.5em 1.1em;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  button:hover { background: color-mix(in srgb, var(--color-accent) 85%, black); }
+  button.ghost {
+    background: transparent;
+    color: var(--color-hint);
+    border: 1px solid var(--color-border);
+  }
+  button.ghost:hover { color: var(--color-text); border-color: var(--color-accent); }
+
+  .tablebox { overflow-x: auto; border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
+  table { border-collapse: collapse; width: 100%; min-width: 900px; font-size: 0.92rem; }
+  th {
+    background: var(--color-surface-card);
+    border-bottom: 2px solid var(--color-border);
+    text-align: left;
+    padding: 12px 14px;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-hint);
+    white-space: nowrap;
+  }
+  th.num, td.num { text-align: right; }
+  td { padding: 11px 14px; vertical-align: top; border-bottom: 1px solid var(--color-border); }
+  tbody tr:nth-child(odd) { background: var(--color-bg); }
+  tbody tr:nth-child(even) { background: var(--color-surface-card); }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr.on { background: color-mix(in srgb, var(--color-accent) 12%, var(--color-bg)); }
+
+  td.pick { width: 34px; }
+  input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--color-accent);
+    cursor: pointer;
+    margin: 2px 0 0;
+  }
+  .mod { font-weight: 600; white-space: nowrap; }
+  .does { color: var(--color-text); min-width: 260px; }
+
+  .pct { display: block; font-variant-numeric: tabular-nums; font-size: 0.95rem; font-weight: 600; color: var(--color-text); white-space: nowrap; }
+  .dl { display: block; font-size: 0.72rem; color: var(--color-hint); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .tune { color: var(--color-hint); font-size: 0.82rem; min-width: 240px; }
+
+  .chip {
+    display: inline-block;
+    border-radius: 999px;
+    padding: 0.2em 0.7em;
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .c-safe { background: color-mix(in srgb, var(--color-success) 14%, transparent); color: var(--color-success); }
+  .c-easy { background: color-mix(in srgb, var(--color-warning) 16%, transparent); color: var(--color-warning); }
+  .c-veryeasy { background: color-mix(in srgb, var(--color-danger) 14%, transparent); color: var(--color-danger); }
+  .c-hard { background: color-mix(in srgb, var(--color-accent-2) 16%, transparent); color: var(--color-accent-2); }
+  .c-admin { background: color-mix(in srgb, var(--color-hint) 16%, transparent); color: var(--color-hint); }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 14px; margin: 14px 0 0; font-size: 0.8rem; color: var(--color-hint); align-items: center; }
+  footer.foot { margin-top: 32px; padding-top: 18px; border-top: 1px solid var(--color-border); font-size: 0.82rem; color: var(--color-hint); }
+  footer.foot p { max-width: 70ch; }
+  .note { color: var(--color-hint); font-size: 0.84rem; }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+  @media print {
+    .panel, .btnrow { display: none; }
+    body { background: #fff; color: #000; }
+    .tablebox { border: none; }
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="head">
+    <span class="eyebrow">Fjordnite &middot; Valheim</span>
+    <h1>Server mod picklist</h1>
+    <p class="lede">Everything here runs on the server only. You install nothing, you change nothing on your PC, and console players still work. Tick what you want, then send me your list.</p>
+    <div class="facts">
+      <span class="fact">ServersideQoL by ArgusMagnus</span>
+      <span class="fact">23 modules</span>
+      <span class="fact">All updated 2026-09-16 for Valheim 1.0</span>
+      <span class="fact">Share: most-picked module = 100%</span>
+    </div>
+  </header>
+
+  <section class="panel" aria-label="Your picks">
+    <div class="panel-top">
+      <span class="count" id="count">0</span>
+      <h2 id="countlabel">modules picked</h2>
+    </div>
+    <ul id="picks"></ul>
+    <p class="empty" id="empty">Nothing picked yet. Tick a box in the table.</p>
+    <div class="btnrow">
+      <button type="button" id="copy">Copy my list</button>
+      <button type="button" class="ghost" id="clear">Clear</button>
+    </div>
+  </section>
+
+  <div class="tablebox">
+    <table>
+      <thead>
+        <tr>
+          <th><span class="sr">Pick</span></th>
+          <th>Module</th>
+          <th>Share of top pick</th>
+          <th>What it does</th>
+          <th>What I can tune for you</th>
+          <th>What it changes</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+
+  <div class="legend">
+    <span class="chip c-safe">Saves clicks</span>
+    <span class="chip c-easy">Easier</span>
+    <span class="chip c-veryeasy">Much easier</span>
+    <span class="chip c-hard">Harder</span>
+    <span class="chip c-admin">Admin only</span>
+  </div>
+
+  <footer class="foot">
+    <p><strong>How to read the share.</strong> The most-downloaded module, AutoStore, is set at 100% and the rest are measured against it. A low share does not mean broken: every module was republished on the same day, so even the last one is only a few days old.</p>
+    <p><strong>If a mod page shows a red compatibility warning, ignore it.</strong> Six of these pages say the mod is "expected to be broken" on our game build. The check is automatic and it is wrong here: the methods it calls missing are ones the mod adds to the game itself while it starts. We installed the flagged parts on the server on 2026-09-20 and they load clean.</p>
+    <p><strong>Not on this list.</strong> Durability loss cannot be turned off from the server. That one is a rule inside your own game, so no server mod can reach it.</p>
+    <p>Counts read from Thunderstore on 2026-09-20. Each module name links to its page on hexium.</p>
+  </footer>
+</main>
+
+<script>
+  var TOP = 4900;
+  var MODS = [
+    ["AutoStore", 4900, "Drops loose items and the items in your pack straight into nearby chests", "veryeasy", "Much easier", "12 settings: what gets picked up and what is left alone, pickup range, the emote that empties your pack into chests, which messages show"],
+    ["ContainerSizes", 3500, "Any chest size you like, and single-item chests can grow forever", "veryeasy", "Much easier", "19 settings: width and height for each chest type, plus a mark that lets a chest grow forever while it holds one item type"],
+    ["LetItFloat", 3400, "Items that sink come back to you in a cargo crate", "safe", "Saves clicks", "1 setting: on or off. Nothing else to tune"],
+    ["ContainerSigns", 3300, "Chests and barrels get a sign that lists what is inside, kept up to date", "safe", "Saves clicks", "14 settings: which chest types get a sign and on which face, how long the list runs, separator, wording"],
+    ["TameAssist", 3300, "Tamed animals follow you anywhere, through portals and into dungeons", "safe", "Saves clicks", "10 settings: which tames take commands, follow distance, dungeon following, taming speed, how long feeding lasts"],
+    ["AutoProcess", 3000, "Smelters, kilns, windmills and shield generators feed themselves from nearby chests", "veryeasy", "Much easier", "10 settings: feed range, how much ore and fuel to leave behind, how near a player must be, capacity and speed"],
+    ["PrefabConfigurator", 2700, "Workbench range, fires you can switch off or that never run out, plant growth time", "easy", "Easier", "12 settings: endless or switchable fires, rain damage, indestructible pieces, plant growth and spacing, cart weight"],
+    ["JustSleep", 2500, "One player in bed starts a vote to skip the night", "safe", "Saves clicks", "4 settings: how many players must be in bed, what share must agree, the wording of the prompt"],
+    ["MultiplayerTweaks", 2400, "Network settings that hide lag, and everyone's map pins can stay on", "safe", "Saves clicks", "5 settings: forced map pins, and whether the nearest player owns mobs, ships and things you interact with"],
+    ["AutoDoors", 2000, "Closes doors behind you", "safe", "Saves clicks", "3 settings: how far away you must be, and how long a door stays open first"],
+    ["AutoMapTables", 1800, "Map tables fill themselves in with portals, ships and ore deposits", "easy", "Easier", "21 settings: how far a table sees, which pins appear (portals, ships, dungeons, each ore), their icons and labels"],
+    ["SmartDefense", 1800, "Ballistae stop shooting you and your tames, and reload from nearby chests", "safe", "Saves clicks", "12 settings: whether ballistae aim at players or tames, reload range, friendly fire, traps, auto-rearm"],
+    ["Player", 1700, "Endless stamina for chosen jobs, and permanent unlocks such as carry weight", "veryeasy", "Much easier", "13 settings: which jobs get endless stamina, the cart emote, and which items give a permanent perk when sacrificed"],
+    ["PortalProgression", 1700, "More metals can go through portals each time a boss falls", "easy", "Easier", "31 settings: which boss unlocks each metal, one entry per metal, plus how close a portal blocks it"],
+    ["Skills", 1600, "Extra effects as your skill levels rise", "easy", "Easier", "16 settings: per-level sliders for rock collapse by pickaxe skill, summon level, summon health and speed, lava tolerance"],
+    ["CreatureLevelUp", 1500, "Monsters can reach higher levels as the world moves on", "hard", "Harder", "9 settings: the level cap, levels gained per boss, star visibility, size scaling, ocean and boss levelling, respawn timing"],
+    ["AutoPortalHub", 1100, "Every portal is wired into one hub", "easy", "Easier", "5 settings: whether the hub builds itself, which portals join by tag, and how new portals are named"],
+    ["WorldOptions", 1100, "Clears the Mistlands mist, sets trader unlocks, shares workbench build range", "easy", "Easier", "19 settings: when the mist clears, map-table view distance, shared build radius, and the keys each trader needs"],
+    ["AdminOptions", 994, "Admins can change build and landscaping limits, and switch on god mode for themselves", "admin", "Admin only", "11 settings: ten admin switches (god mode, endless stamina, free building, no workbench, dungeon building, ground levelling), all off until bound to an emote"],
+    ["Signs", 822, "Signs can show the in-game time, and you can set a default colour", "safe", "Saves clicks", "3 settings: the default sign colour and whether clock signs show the in-game time"],
+    ["Backpack", 726, "A backpack that holds more as you progress", "easy", "Easier", "6 settings: the emote that opens it, starting slots, extra slots per boss killed, weight cap, what happens on death"],
+    ["SuperWishbone", 694, "The wishbone also finds dungeons and vegvisirs", "easy", "Easier", "5 settings: dungeon and vegvisir finding, range, and a text pattern for anything else you want it to find"],
+    ["DropControl", 603, "Changes what monsters drop", "easy", "Easier", "1 setting plus a table file: amount, chance, level and quality per creature"]
+  ];
+  var BASE = "https://valheim.hexium.gg/mods/ArgusMagnus/ServersideQoL_";
+  var KEY = "fjordnite-picks-v1";
+
+  function fmt(n) { return n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, "") + "K" : String(n); }
+
+  var rows = document.getElementById("rows");
+  MODS.forEach(function (m) {
+    var name = m[0], dl = m[1], does = m[2], cls = m[3], label = m[4];
+    var pct = Math.round(dl / TOP * 100);
+    var tr = document.createElement("tr");
+    tr.innerHTML =
+      '<td class="pick"><input type="checkbox" id="pick-' + name + '" data-mod="' + name + '" aria-label="Pick ' + name + '"></td>' +
+      '<td class="mod"><a href="' + BASE + name + '" target="_blank" rel="noopener">' + name + '</a></td>' +
+      '<td class="num"><span class="pct">' + pct + '%</span><span class="dl">' + fmt(dl) + ' downloads</span></td>' +
+      '<td class="does">' + does + '</td>' +
+      '<td class="tune">' + m[5] + '</td>' +
+      '<td><span class="chip c-' + cls + '">' + label + '</span></td>';
+    rows.appendChild(tr);
+  });
+
+  var boxes = Array.prototype.slice.call(rows.querySelectorAll('input[type="checkbox"]'));
+  var picksEl = document.getElementById("picks");
+  var countEl = document.getElementById("count");
+  var labelEl = document.getElementById("countlabel");
+  var emptyEl = document.getElementById("empty");
+
+  function save(list) {
+    try { localStorage.setItem(KEY, JSON.stringify(list)); } catch (e) { /* storage may be blocked */ }
+  }
+  function load() {
+    try {
+      var raw = localStorage.getItem(KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch (e) { return []; }
+  }
+  function chosen() {
+    return boxes.filter(function (b) { return b.checked; }).map(function (b) { return b.dataset.mod; });
+  }
+  function render() {
+    var list = chosen();
+    countEl.textContent = list.length;
+    labelEl.textContent = list.length === 1 ? "module picked" : "modules picked";
+    picksEl.innerHTML = "";
+    list.forEach(function (n) {
+      var li = document.createElement("li");
+      li.textContent = n;
+      picksEl.appendChild(li);
+    });
+    emptyEl.hidden = list.length > 0;
+    boxes.forEach(function (b) {
+      b.closest("tr").classList.toggle("on", b.checked);
+    });
+    save(list);
+  }
+
+  var saved = load();
+  boxes.forEach(function (b) {
+    if (saved.indexOf(b.dataset.mod) !== -1) { b.checked = true; }
+    b.addEventListener("change", render);
+  });
+  render();
+
+  document.getElementById("clear").addEventListener("click", function () {
+    boxes.forEach(function (b) { b.checked = false; });
+    render();
+  });
+
+  document.getElementById("copy").addEventListener("click", function (e) {
+    var list = chosen();
+    var text = list.length
+      ? "Fjordnite mod picks (" + list.length + "): " + list.join(", ")
+      : "Fjordnite mod picks: none yet";
+    var btn = e.currentTarget;
+    function done(ok) {
+      btn.textContent = ok ? "Copied" : "Press Ctrl+C";
+      setTimeout(function () { btn.textContent = "Copy my list"; }, 1800);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+    } else {
+      done(false);
+    }
+  });
+</script>
+</body>
+</html>

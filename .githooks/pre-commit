@@ -1,0 +1,35 @@
+#!/bin/sh
+# Refuse a commit that carries server details into this public repo.
+# Turn on once per clone:  git config core.hooksPath .githooks
+#
+# Patterns only. No secret is written in this file, because this file is public too.
+
+fail=0
+
+check() {
+  label="$1"
+  pattern="$2"
+  hits=$(git diff --cached -U0 --no-color | grep -e "^+" | grep -inE -e "$pattern" | head -5)
+  if [ -n "$hits" ]; then
+    echo "BLOCKED: $label"
+    echo "$hits" | sed 's/^/  /'
+    fail=1
+  fi
+}
+
+check "a private address"        '(^|[^0-9])(10|192\.168|172\.(1[6-9]|2[0-9]|3[01]))\.[0-9]{1,3}\.[0-9]{1,3}'
+check "an ntfy alert topic"      'srv-(stats|players|alerts)-[a-z0-9]{12,}'
+check "an ntfy URL"              'ntfy\.sh/[a-z0-9-]{8,}'
+check "a SteamID64"              '7656119[0-9]{10}'
+check "a server password flag"   '-password[[:space:]]+[^[:space:]]'
+check "an SSH private key"       'BEGIN (OPENSSH|RSA|EC) PRIVATE KEY'
+check "a shell login to the box" '(ssh|scp)[[:space:]]+[a-z]+@[0-9]'
+
+if [ "$fail" -ne 0 ]; then
+  echo
+  echo "Nothing was committed. Take the server detail out, or commit with --no-verify only if"
+  echo "you are certain the match is a false alarm."
+  exit 1
+fi
+
+exit 0
