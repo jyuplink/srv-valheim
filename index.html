@@ -80,7 +80,7 @@
     margin: 0;
   }
   .wrap {
-    max-width: 1100px;
+    max-width: 1480px;
     margin: 0 auto;
     padding-inline: 16px;
     padding-block: 32px 64px;
@@ -172,7 +172,7 @@
   button.ghost:hover { color: var(--color-text); border-color: var(--color-accent); }
 
   .tablebox { overflow-x: auto; border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
-  table { border-collapse: collapse; width: 100%; min-width: 900px; font-size: 0.92rem; }
+  table { border-collapse: collapse; width: 100%; min-width: 1000px; font-size: 0.92rem; }
   th {
     background: var(--color-surface-card);
     border-bottom: 2px solid var(--color-border);
@@ -200,6 +200,10 @@
     margin: 2px 0 0;
   }
   .mod { font-weight: 600; white-space: nowrap; }
+  .mod-cell { display: flex; align-items: center; gap: 14px; }
+  .mod-cell > div { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+  .mod-icon { width: 80px; height: 80px; border-radius: 12px; flex: none; object-fit: cover; background: var(--color-surface-card); }
+  .lm-icon { width: 48px; height: 48px; border-radius: 6px; flex: none; object-fit: cover; }
   .does { color: var(--color-text); min-width: 260px; }
 
   .pct { display: block; font-variant-numeric: tabular-nums; font-size: 0.95rem; font-weight: 600; color: var(--color-text); white-space: nowrap; }
@@ -304,7 +308,7 @@
     <div class="facts">
       <span class="fact">ServersideQoL by ArgusMagnus</span>
       <span class="fact">23 modules</span>
-      <span class="fact fact-live">9 live now</span>
+      <span class="fact fact-live">10 live now</span>
       <span class="fact">All updated 2026-09-16 for Valheim 1.0</span>
       <span class="fact">Share: most-picked module = 100%</span>
     </div>
@@ -473,6 +477,13 @@
     ]]
   };
   var BASE = "https://valheim.hexium.gg/mods/ArgusMagnus/ServersideQoL_";
+  // Thunderstore icon for each module; the URL carries the version it was uploaded with.
+  var ICON_V14 = ["AutoStore", "PrefabConfigurator", "AutoMapTables", "Skills", "CreatureLevelUp", "Backpack"];
+  function icon(name, cls) {
+    var v = ICON_V14.indexOf(name) !== -1 ? "2.0.14" : "2.0.11";
+    return '<img class="' + cls + '" src="https://ccdn.thunderstore.io/live/repository/icons/ArgusMagnus-ServersideQoL_' +
+      name + '-' + v + '.png" alt="" width="80" height="80" loading="lazy">';
+  }
 
   function esc(s) {
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -487,7 +498,7 @@
       return '<tr><td class="k">' + esc(r[0]) + '</td><td class="v">' + esc(r[1]) + '</td><td>' + esc(r[2]) + '</td></tr>';
     }).join("");
     d.innerHTML =
-      '<summary><span class="lm-name">' + name + '</span><span class="lm-sum">' + esc(sum) + '</span></summary>' +
+      '<summary><span class="lm-name">' + icon(name, "lm-icon") + name + '</span><span class="lm-sum">' + esc(sum) + '</span></summary>' +
       '<div class="lm-table"><table><tbody>' + body + '</tbody></table></div>' +
       '<a class="lm-link" href="' + BASE + name + '" target="_blank" rel="noopener">Mod page</a>';
     liveEl.appendChild(d);
@@ -506,8 +517,9 @@
     tr.innerHTML =
       '<td class="pick"><input type="checkbox" id="pick-' + name + '" data-mod="' + name + '"' +
         (isLive ? ' checked disabled aria-label="' + name + ' is already live"' : ' aria-label="Pick ' + name + '"') + '></td>' +
-      '<td class="mod"><a href="' + BASE + name + '" target="_blank" rel="noopener">' + name + '</a>' +
-        (isLive ? ' <span class="chip c-live">Live</span>' : '') + '</td>' +
+      '<td class="mod"><div class="mod-cell">' + icon(name, "mod-icon") +
+        '<div><a href="' + BASE + name + '" target="_blank" rel="noopener">' + name + '</a>' +
+        (isLive ? '<span class="chip c-live">Live</span>' : '') + '</div></div></td>' +
       '<td class="num"><span class="pct">' + pct + '%</span><span class="dl">' + fmt(dl) + ' downloads</span></td>' +
       '<td class="does">' + does + '</td>' +
       '<td class="tune">' + m[5] + '</td>' +
