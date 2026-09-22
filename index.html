@@ -222,6 +222,53 @@
   .c-hard { background: color-mix(in srgb, var(--color-accent-2) 16%, transparent); color: var(--color-accent-2); }
   .c-admin { background: color-mix(in srgb, var(--color-hint) 16%, transparent); color: var(--color-hint); }
 
+  .fact-live { border-color: var(--color-accent); color: var(--color-accent); font-weight: 600; }
+  .live { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
+  .picks-h { margin: 0 0 14px; }
+  .callout {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 14px 16px;
+    background: var(--color-surface-elevated);
+    font-size: 0.92rem;
+  }
+  .callout p:last-child { margin-bottom: 0; }
+  code {
+    font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+    font-size: 0.85em;
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 0 0.3em;
+  }
+  .livelist { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; }
+  details.lm {
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 12px 14px;
+  }
+  details.lm[open] { grid-column: 1 / -1; }
+  details.lm summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  details.lm summary::-webkit-details-marker { display: none; }
+  .lm-name { font-weight: 700; display: flex; align-items: center; gap: 8px; }
+  .lm-name::after { content: "+"; margin-left: auto; color: var(--color-hint); font-weight: 600; }
+  details.lm[open] .lm-name::after { content: "\2212"; }
+  .lm-sum { font-size: 0.86rem; color: var(--color-hint); }
+  .lm-table { margin-top: 12px; overflow-x: auto; }
+  .lm-table table { min-width: 0; font-size: 0.84rem; }
+  .lm-table td { padding: 7px 10px; }
+  .lm-table td.k { font-weight: 600; white-space: nowrap; }
+  .lm-table td.v { white-space: nowrap; color: var(--color-link); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .lm-link { display: inline-block; margin-top: 8px; font-size: 0.8rem; }
+  .c-live { background: color-mix(in srgb, var(--color-accent) 16%, transparent); color: var(--color-link); }
+  tbody tr.is-live { opacity: 0.72; }
   .legend { display: flex; flex-wrap: wrap; gap: 8px 14px; margin: 14px 0 0; font-size: 0.8rem; color: var(--color-hint); align-items: center; }
   footer.foot { margin-top: 32px; padding-top: 18px; border-top: 1px solid var(--color-border); font-size: 0.82rem; color: var(--color-hint); }
   footer.foot p { max-width: 70ch; }
@@ -245,10 +292,23 @@
     <div class="facts">
       <span class="fact">ServersideQoL by ArgusMagnus</span>
       <span class="fact">23 modules</span>
+      <span class="fact fact-live">9 live now</span>
       <span class="fact">All updated 2026-09-16 for Valheim 1.0</span>
       <span class="fact">Share: most-picked module = 100%</span>
     </div>
   </header>
+
+  <section class="live" aria-labelledby="live-h">
+    <h2 id="live-h">Live on Fjordnite now</h2>
+    <div class="callout">
+      <p><strong>Emotes are the buttons.</strong> Vanilla Valheim has no mod menu, so the server watches your emotes. <strong>Sit</strong> puts your inventory away into chests that already hold those items. <strong>Wave</strong> opens your backpack. Use the emote wheel, type <code>/sit</code> or <code>/wave</code> in chat, or bind a key with <code>/bind &lt;key&gt; Wave</code>.</p>
+      <p><strong>Sit does two jobs.</strong> Sitting also counts as a yes vote to skip the night, so voting to sleep beside your chests puts your things away too. Nothing is lost; it only fills chests that already hold that item.</p>
+    </div>
+    <div id="livelist" class="livelist"></div>
+    <p class="note">All nine run on the author's default settings. Tap a mod to see every setting.</p>
+  </section>
+
+  <h2 class="picks-h">Pick more</h2>
 
   <section class="panel" aria-label="Your picks">
     <div class="panel-top">
@@ -322,7 +382,84 @@
     ["SuperWishbone", 694, "The wishbone also finds dungeons and vegvisirs", "easy", "Easier", "5 settings: dungeon and vegvisir finding, range, and a text pattern for anything else you want it to find"],
     ["DropControl", 603, "Changes what monsters drop", "easy", "Easier", "1 setting plus a table file: amount, chance, level and quality per creature"]
   ];
+  // Live on the server since 2026-09-22, author's defaults. Read from each module's .cfg.
+  var LIVE = {
+    AutoStore: ["Chests sort themselves, and loose drops go into a chest that already holds that item.", [
+      ["Sorts chests", "on", "Chest contents stay sorted"],
+      ["Pickup range", "64 m", "A dropped item goes into a chest this close that already holds that item"],
+      ["Waits until players are", "4 m away", "Nothing is filed while someone stands next to it"],
+      ["Animal food", "left alone", "Food stays on the ground when tames are near"],
+      ["Sit emote", "stacks your inventory", "Puts your items into nearby chests that already hold them"],
+      ["Duplication guard", "on", "The server takes the item before filing it, so nothing doubles"]
+    ]],
+    Backpack: ["Wave to open it. 4 slots, 4 more per boss, no weight limit.", [
+      ["Open with", "Wave", "Or bind a key: /bind <key> Wave"],
+      ["Starting slots", "4", ""],
+      ["Extra slots per boss", "4", "Counts bosses the world has beaten"],
+      ["Weight limit", "none", "Nothing in it counts towards carry weight"],
+      ["On death", "same as inventory", "It goes wherever your inventory goes"]
+    ]],
+    AutoProcess: ["Smelters, kilns and windmills pull ore and fuel from chests right next to them.", [
+      ["Feed range", "4 m", "The chest must sit this close. Kept small on purpose: a wider range lets the kiln burn your building wood"],
+      ["Only while nobody is within", "4 m", "It feeds when you step away"],
+      ["Leaves behind", "1 ore, 1 fuel", "A chest is never emptied completely"],
+      ["Speed and capacity", "vanilla", "It never waits for you, but it is no faster"]
+    ]],
+    TameAssist: ["Tames and summons keep up with you, through portals and into dungeons.", [
+      ["Catch up after", "64 m", "Followers jump to you once you are this far ahead"],
+      ["Into dungeons", "yes", "They follow you in and back out"],
+      ["Progress", "shown above the animal", "See how close a tame is, and how a baby is growing"],
+      ["Taming speed, feeding, potion", "vanilla", "Taming itself is no faster"],
+      ["Commands", "vanilla", "Only animals that vanilla lets you command"]
+    ]],
+    JustSleep: ["One player in bed starts a vote. Everyone in bed or sitting skips the night.", [
+      ["Prompt after", "1 player in bed", "Everyone else sees the prompt"],
+      ["Needed to skip", "100%", "Every player must be in bed or sitting"],
+      ["Watch out", "Sit", "Sitting also triggers AutoStore"]
+    ]],
+    PortalProgression: ["Metals go through portals once the boss that guards them is down.", [
+      ["The Elder", "copper, tin, bronze", "Ores and scrap too"],
+      ["Bonemass", "iron", "Ore, scrap and iron pits too"],
+      ["Moder", "silver, dragon egg", ""],
+      ["The Queen", "Dvergr needles, springs", ""],
+      ["Yagluth", "black metal", "Scrap too"],
+      ["Fader", "flametal, cogwheels", ""],
+      ["Never", "gold, Hildir's chests", ""],
+      ["Held within", "4 m of a portal", "The server holds the metal so you can pass, and gives it back on the other side"]
+    ]],
+    AutoPortalHub: ["Any portal without a partner links to a shared hub.", [
+      ["Joins the hub", "every unpaired portal", "One portal home reaches every outpost through the hub"],
+      ["Paired portals", "unchanged", "Portals you pair by name work as before"],
+      ["Auto-naming", "off", ""]
+    ]],
+    LetItFloat: ["Anything that sinks comes back in a floating crate.", [
+      ["Only setting", "on", ""]
+    ]],
+    AutoDoors: ["Doors close themselves behind you.", [
+      ["Closes once players are", "4 m away", "Standing in the doorway keeps it open"],
+      ["After being open", "2 s", ""]
+    ]]
+  };
   var BASE = "https://valheim.hexium.gg/mods/ArgusMagnus/ServersideQoL_";
+
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  var liveEl = document.getElementById("livelist");
+  Object.keys(LIVE).forEach(function (name) {
+    var sum = LIVE[name][0], rowsL = LIVE[name][1];
+    var d = document.createElement("details");
+    d.className = "lm";
+    var body = rowsL.map(function (r) {
+      return '<tr><td class="k">' + esc(r[0]) + '</td><td class="v">' + esc(r[1]) + '</td><td>' + esc(r[2]) + '</td></tr>';
+    }).join("");
+    d.innerHTML =
+      '<summary><span class="lm-name">' + name + '</span><span class="lm-sum">' + esc(sum) + '</span></summary>' +
+      '<div class="lm-table"><table><tbody>' + body + '</tbody></table></div>' +
+      '<a class="lm-link" href="' + BASE + name + '" target="_blank" rel="noopener">Mod page</a>';
+    liveEl.appendChild(d);
+  });
   var KEY = "fjordnite-picks-v1";
 
   function fmt(n) { return n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, "") + "K" : String(n); }
@@ -331,10 +468,14 @@
   MODS.forEach(function (m) {
     var name = m[0], dl = m[1], does = m[2], cls = m[3], label = m[4];
     var pct = Math.round(dl / TOP * 100);
+    var isLive = Object.prototype.hasOwnProperty.call(LIVE, name);
     var tr = document.createElement("tr");
+    if (isLive) { tr.className = "is-live"; }
     tr.innerHTML =
-      '<td class="pick"><input type="checkbox" id="pick-' + name + '" data-mod="' + name + '" aria-label="Pick ' + name + '"></td>' +
-      '<td class="mod"><a href="' + BASE + name + '" target="_blank" rel="noopener">' + name + '</a></td>' +
+      '<td class="pick"><input type="checkbox" id="pick-' + name + '" data-mod="' + name + '"' +
+        (isLive ? ' checked disabled aria-label="' + name + ' is already live"' : ' aria-label="Pick ' + name + '"') + '></td>' +
+      '<td class="mod"><a href="' + BASE + name + '" target="_blank" rel="noopener">' + name + '</a>' +
+        (isLive ? ' <span class="chip c-live">Live</span>' : '') + '</td>' +
       '<td class="num"><span class="pct">' + pct + '%</span><span class="dl">' + fmt(dl) + ' downloads</span></td>' +
       '<td class="does">' + does + '</td>' +
       '<td class="tune">' + m[5] + '</td>' +
@@ -358,7 +499,7 @@
     } catch (e) { return []; }
   }
   function chosen() {
-    return boxes.filter(function (b) { return b.checked; }).map(function (b) { return b.dataset.mod; });
+    return boxes.filter(function (b) { return b.checked && !b.disabled; }).map(function (b) { return b.dataset.mod; });
   }
   function render() {
     var list = chosen();
@@ -372,7 +513,7 @@
     });
     emptyEl.hidden = list.length > 0;
     boxes.forEach(function (b) {
-      b.closest("tr").classList.toggle("on", b.checked);
+      b.closest("tr").classList.toggle("on", b.checked && !b.disabled);
     });
     save(list);
   }
@@ -385,7 +526,7 @@
   render();
 
   document.getElementById("clear").addEventListener("click", function () {
-    boxes.forEach(function (b) { b.checked = false; });
+    boxes.forEach(function (b) { if (!b.disabled) { b.checked = false; } });
     render();
   });
 
