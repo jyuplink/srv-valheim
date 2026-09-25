@@ -327,13 +327,13 @@
         <div><dt>Resources</dt><dd><span class="wv">Much more</span> One step below the top. Roughly double from trees, rocks and creatures.</dd></div>
         <div><dt>Raids</dt><dd><span class="wv">Player-based</span> A raid matches the progress of the player it targets, not the world's.</dd></div>
         <div><dt>Build cost</dt><dd><span class="wv">Free</span> Building with the hammer costs no materials. You still need a workbench nearby, and weapons, armour, tools and food still cost the normal materials.</dd></div>
-        <div><dt>Portals</dt><dd><span class="wv">Vanilla</span> Metal unlocks for portals one boss at a time, through the PortalProgression mod below.</dd></div>
+        <div><dt>Portals</dt><dd><span class="wv">Casual</span> Every ore and ingot goes through a portal, from the start. Gold too. No boat runs. This replaced the PortalProgression mod on 2026-09-26, which is now switched off.</dd></div>
         <div><dt>Fire hazard</dt><dd><span class="wv">Off</span> Fire does not spread, except in the Ashlands, where the game always forces it on.</dd></div>
         <div><dt>Everything else</dt><dd><span class="wv">Vanilla</span> Combat difficulty, raid frequency and the rest are the normal game.</dd></div>
       </dl>
     </div>
     <div id="livelist" class="livelist"></div>
-    <p class="note">Nine run on the author's default settings. Player has two changes: endless stamina for building and farming. Tap a mod to see every setting.</p>
+    <p class="note">Eight run on the author's default settings. Player has two changes (endless stamina for building and farming) and PrefabConfigurator has one (instant mead). PortalProgression is still installed but switched off, because the Casual portal setting above does its job better. Tap a mod to see every setting.</p>
   </section>
 
   <h2 class="picks-h">Pick more</h2>
@@ -392,14 +392,14 @@
     ["ContainerSigns", 3300, "Chests and barrels get a sign that lists what is inside, kept up to date", "safe", "Saves clicks", "14 settings: which chest types get a sign and on which face, how long the list runs, separator, wording"],
     ["TameAssist", 3300, "Tamed animals follow you anywhere, through portals and into dungeons", "safe", "Saves clicks", "10 settings: which tames take commands, follow distance, dungeon following, taming speed, how long feeding lasts"],
     ["AutoProcess", 3000, "Smelters, kilns, windmills and shield generators feed themselves from nearby chests", "veryeasy", "Much easier", "10 settings: feed range, how much ore and fuel to leave behind, how near a player must be, capacity and speed"],
-    ["PrefabConfigurator", 2700, "Workbench range, fires you can switch off or that never run out, plant growth time", "easy", "Easier", "12 settings: endless or switchable fires, rain damage, indestructible pieces, plant growth and spacing, cart weight"],
+    ["PrefabConfigurator", 2700, "Workbench range, fires you can switch off or that never run out, plant growth time. Live for instant mead only", "easy", "Easier", "12 settings: endless or switchable fires, rain damage, indestructible pieces, plant growth and spacing, cart weight"],
     ["JustSleep", 2500, "One player in bed starts a vote to skip the night", "safe", "Saves clicks", "4 settings: how many players must be in bed, what share must agree, the wording of the prompt"],
     ["MultiplayerTweaks", 2400, "Network settings that hide lag, and everyone's map pins can stay on", "safe", "Saves clicks", "5 settings: forced map pins, and whether the nearest player owns mobs, ships and things you interact with"],
     ["AutoDoors", 2000, "Closes doors behind you", "safe", "Saves clicks", "3 settings: how far away you must be, and how long a door stays open first"],
     ["AutoMapTables", 1800, "Map tables fill themselves in with portals, ships and ore deposits", "easy", "Easier", "21 settings: how far a table sees, which pins appear (portals, ships, dungeons, each ore), their icons and labels"],
     ["SmartDefense", 1800, "Ballistae stop shooting you and your tames, and reload from nearby chests", "safe", "Saves clicks", "12 settings: whether ballistae aim at players or tames, reload range, friendly fire, traps, auto-rearm"],
     ["Player", 1700, "Endless stamina for chosen jobs, and permanent unlocks such as carry weight", "veryeasy", "Much easier", "13 settings: which jobs get endless stamina, the cart emote, and which items give a permanent perk when sacrificed"],
-    ["PortalProgression", 1700, "More metals can go through portals each time a boss falls", "easy", "Easier", "31 settings: which boss unlocks each metal, one entry per metal, plus how close a portal blocks it"],
+    ["PortalProgression", 1700, "Switched off 2026-09-26 \u2014 the Casual portal setting already sends every metal through", "easy", "Easier", "31 settings: which boss unlocks each metal, one entry per metal, plus how close a portal blocks it"],
     ["Skills", 1600, "Extra effects as your skill levels rise", "easy", "Easier", "16 settings: per-level sliders for rock collapse by pickaxe skill, summon level, summon health and speed, lava tolerance"],
     ["CreatureLevelUp", 1500, "Monsters can reach higher levels as the world moves on", "hard", "Harder", "9 settings: the level cap, levels gained per boss, star visibility, size scaling, ocean and boss levelling, respawn timing"],
     ["AutoPortalHub", 1100, "Every portal is wired into one hub", "easy", "Easier", "5 settings: whether the hub builds itself, which portals join by tag, and how new portals are named"],
@@ -446,15 +446,11 @@
       ["Needed to skip", "100%", "Every player must be in bed or sitting"],
       ["Watch out", "Sit", "Sitting also triggers AutoStore"]
     ]],
-    PortalProgression: ["Metals go through portals once the boss that guards them is down.", [
-      ["The Elder", "copper, tin, bronze", "Ores and scrap too"],
-      ["Bonemass", "iron", "Ore, scrap and iron pits too"],
-      ["Moder", "silver, dragon egg", ""],
-      ["The Queen", "Dvergr needles, springs", ""],
-      ["Yagluth", "black metal", "Scrap too"],
-      ["Fader", "flametal, cogwheels", ""],
-      ["Never", "gold, Hildir's chests", ""],
-      ["Held within", "4 m of a portal", "The server holds the metal so you can pass, and gives it back on the other side"]
+    PrefabConfigurator: ["Mead ferments instantly. Nothing else this module can do is switched on.", [
+      ["Fermenting time", "1 second", "Vanilla is 40 minutes. Drop the base in and it is ready"],
+      ["Plant growth", "vanilla", "Default"],
+      ["Cart weight", "vanilla", "Default"],
+      ["Workbench range, fires, rain damage", "vanilla", "Default"]
     ]],
     AutoPortalHub: ["Any portal without a partner links to a shared hub.", [
       ["Joins the hub", "every unpaired portal", "One portal home reaches every outpost through the hub"],
