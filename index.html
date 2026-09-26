@@ -308,7 +308,7 @@
     <div class="facts">
       <span class="fact">ServersideQoL by ArgusMagnus</span>
       <span class="fact">23 modules</span>
-      <span class="fact fact-live">10 live now</span>
+      <span class="fact fact-live">13 live now</span>
       <span class="fact">All updated 2026-09-16 for Valheim 1.0</span>
       <span class="fact">Share: most-picked module = 100%</span>
     </div>
@@ -333,7 +333,7 @@
       </dl>
     </div>
     <div id="livelist" class="livelist"></div>
-    <p class="note">Eight run on the author's default settings. Player has two changes (endless stamina for building and farming) and PrefabConfigurator has one (instant mead). PortalProgression is still installed but switched off, because the Casual portal setting above does its job better. Tap a mod to see every setting.</p>
+    <p class="note">Eight run on the author's default settings. Five are changed: Player (endless stamina for building and farming), PrefabConfigurator (instant mead), AutoProcess (8 m feed range), ContainerSizes (four chest types grow forever while they hold one kind of item) and ContainerSigns (a contents sign on the front of chests and barrels). PortalProgression is still installed but switched off, because the Casual portal setting above does its job better. Tap a mod to see every setting.</p>
   </section>
 
   <h2 class="picks-h">Pick more</h2>
@@ -471,6 +471,25 @@
       ["Fighting and running", "normal", "Not part of this mod"],
       ["Permanent perks from sacrifices", "off", "Default"],
       ["Cart emote", "off", "Default"]
+    ]],
+    ContainerSizes: ["A chest that holds one kind of item never fills up.", [
+      ["Chest, Reinforced, Black Metal, Grausten", "grow forever", "Only while the chest holds a single item type. Put two things in and it is a normal chest again"],
+      ["Cart, Karve, Longship, Drakkar", "vanilla", "Left alone on purpose, so hauling still matters"],
+      ["Wardrobe, Personal Chest, Barrel, pots", "vanilla", "Default"],
+      ["Why", "one chest is enough", "The nearest server-only answer to crafting from chests: it shortens the trip, it cannot remove it"]
+    ]],
+    ContainerSigns: ["Chests and barrels wear a sign listing what is inside.", [
+      ["Sign face", "front", "Wood, Reinforced, Black Metal and Grausten chests, and barrels"],
+      ["Wardrobe, Obliterator", "no sign", "Left off"],
+      ["Lines shown", "3", "Then one line reading Other"],
+      ["Watch out", "these are real signs", "The server builds actual sign pieces on your chests"]
+    ]],
+    AutoMapTables: ["Map tables pool what everyone has found.", [
+      ["Table range", "64 m", "Stand this close and your discoveries copy onto the table"],
+      ["Ore pins", "Cu, Ag, Fe, gold, soft tissue", "Only after someone hits the deposit with a pickaxe from within 32 m"],
+      ["Portals, ships, dungeons", "pinned", "A dungeon pins after someone walks within 4 m of the entrance"],
+      ["Not a free map", "nothing unfound appears", "It shares discoveries; it does not reveal the world"],
+      ["Your own pins", "kept", "Custom pins are never discarded"]
     ]]
   };
   var BASE = "https://valheim.hexium.gg/mods/ArgusMagnus/ServersideQoL_";
