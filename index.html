@@ -333,7 +333,7 @@
       </dl>
     </div>
     <div id="livelist" class="livelist"></div>
-    <p class="note">Eight run on the author's default settings. Five are changed: Player (endless stamina for building and farming), PrefabConfigurator (instant mead), AutoProcess (8 m feed range), ContainerSizes (four chest types grow forever while they hold one kind of item) and ContainerSigns (a contents sign on the front of chests and barrels). PortalProgression is still installed but switched off, because the Casual portal setting above does its job better. Tap a mod to see every setting.</p>
+    <p class="note">Seven run on the author's default settings. Six are changed: Player (endless stamina for building and farming), PrefabConfigurator (instant mead), AutoProcess (8 m feed range, fermenters fill and tap themselves), TameAssist (hungry tames eat from chests within 8 m), ContainerSizes (four chest types grow forever while they hold one kind of item) and ContainerSigns (a contents sign on the front of chests and barrels). PortalProgression is still installed but switched off, because the Casual portal setting above does its job better. Tap a mod to see every setting.</p>
   </section>
 
   <h2 class="picks-h">Pick more</h2>
@@ -391,11 +391,11 @@
     ["LetItFloat", 3400, "Items that sink come back to you in a cargo crate", "safe", "Saves clicks", "1 setting: on or off. Nothing else to tune"],
     ["ContainerSigns", 3300, "Chests and barrels get a sign that lists what is inside, kept up to date", "safe", "Saves clicks", "14 settings: which chest types get a sign and on which face, how long the list runs, separator, wording"],
     ["TameAssist", 3300, "Tamed animals follow you anywhere, through portals and into dungeons", "safe", "Saves clicks", "16 settings: which tames take commands, follow distance, dungeon following, taming speed, how long feeding lasts, eating from nearby chests"],
-    ["AutoProcess", 3000, "Smelters, kilns, windmills and shield generators feed themselves from nearby chests", "veryeasy", "Much easier", "10 settings: feed range, how much ore and fuel to leave behind, how near a player must be, capacity and speed"],
+    ["AutoProcess", 3000, "Smelters, kilns, windmills and shield generators feed themselves from nearby chests, and fermenters can fill and tap themselves", "veryeasy", "Much easier", "13 settings: feed range, how much ore and fuel to leave behind, how near a player must be, capacity and speed, filling and tapping fermenters"],
     ["PrefabConfigurator", 2700, "Workbench range, fires you can switch off or that never run out, plant growth time. Live for instant mead only", "easy", "Easier", "12 settings: endless or switchable fires, rain damage, indestructible pieces, plant growth and spacing, cart weight"],
     ["JustSleep", 2500, "One player in bed starts a vote to skip the night", "safe", "Saves clicks", "4 settings: how many players must be in bed, what share must agree, the wording of the prompt"],
     ["MultiplayerTweaks", 2400, "Network settings that hide lag, and everyone's map pins can stay on", "safe", "Saves clicks", "5 settings: forced map pins, and whether the nearest player owns mobs, ships and things you interact with"],
-    ["AutoDoors", 2000, "Closes doors behind you", "safe", "Saves clicks", "3 settings: how far away you must be, and how long a door stays open first"],
+    ["AutoDoors", 2000, "Closes doors behind you", "safe", "Saves clicks", "15 settings: how far away you must be, how long a door stays open first, and which door types close"],
     ["AutoMapTables", 1800, "Map tables fill themselves in with portals, ships and ore deposits", "easy", "Easier", "21 settings: how far a table sees, which pins appear (portals, ships, dungeons, each ore), their icons and labels"],
     ["SmartDefense", 1800, "Ballistae stop shooting you and your tames, and reload from nearby chests", "safe", "Saves clicks", "12 settings: whether ballistae aim at players or tames, reload range, friendly fire, traps, auto-rearm"],
     ["Player", 1700, "Endless stamina for chosen jobs, and permanent unlocks such as carry weight", "veryeasy", "Much easier", "13 settings: which jobs get endless stamina, the cart emote, and which items give a permanent perk when sacrificed"],
@@ -428,11 +428,12 @@
       ["Weight limit", "none", "Nothing in it counts towards carry weight"],
       ["On death", "same as inventory", "It goes wherever your inventory goes"]
     ]],
-    AutoProcess: ["Smelters, kilns and windmills pull ore and fuel from chests right next to them.", [
+    AutoProcess: ["Smelters, kilns and windmills pull ore and fuel from chests right next to them. Fermenters fill and tap themselves.", [
       ["Feed range", "8 m", "The chest must sit this close. Raised from 4 m on 2026-09-26. Careful: a kiln can now reach a chest of building wood and burn it into coal"],
       ["Only while nobody is within", "4 m", "It feeds when you step away"],
       ["Leaves behind", "1 ore, 1 fuel", "A chest is never emptied completely"],
-      ["Speed and capacity", "vanilla", "It never waits for you, but it is no faster"]
+      ["Speed and capacity", "vanilla", "It never waits for you, but it is no faster"],
+      ["Fermenters", "fill and tap themselves", "New 2026-10-03. A mead base in a chest within 8 m goes in by itself. When the mead is ready it pops out, and AutoStore puts it in a chest that already holds that mead. Every base is used, none kept back"]
     ]],
     TameAssist: ["Tames and summons keep up with you, through portals and into dungeons, and hungry tames eat from nearby chests.", [
       ["Eats from chests", "within 8 m", "A hungry tame feeds itself from any chest this close. At least 1 of each food is always left"],
@@ -463,7 +464,8 @@
     ]],
     AutoDoors: ["Doors close themselves behind you.", [
       ["Closes once players are", "4 m away", "Standing in the doorway keeps it open"],
-      ["After being open", "2 s", ""]
+      ["After being open", "2 s", ""],
+      ["Drawbridges, wood shutters", "stay open", "Since the 2026-10-03 update. Every other door and gate still closes"]
     ]],
     Player: ["Building and farming never run your stamina out.", [
       ["Building (hammer, hoe)", "endless", "Changed from the default. Stamina still drains, but refills just before it runs out"],
