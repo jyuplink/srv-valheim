@@ -225,6 +225,7 @@
   .c-veryeasy { background: color-mix(in srgb, var(--color-danger) 14%, transparent); color: var(--color-danger); }
   .c-hard { background: color-mix(in srgb, var(--color-accent-2) 16%, transparent); color: var(--color-accent-2); }
   .c-admin { background: color-mix(in srgb, var(--color-hint) 16%, transparent); color: var(--color-hint); }
+  .c-either { background: color-mix(in srgb, var(--color-link) 14%, transparent); color: var(--color-link); }
 
   .fact-live { border-color: var(--color-accent); color: var(--color-accent); font-weight: 600; }
   .live { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
@@ -307,9 +308,9 @@
     <p class="lede">Everything here runs on the server only. You install nothing, you change nothing on your PC, and console players still work. Tick what you want, then send me your list.</p>
     <div class="facts">
       <span class="fact">ServersideQoL by ArgusMagnus</span>
-      <span class="fact">23 modules</span>
+      <span class="fact">26 modules</span>
       <span class="fact fact-live">13 live now</span>
-      <span class="fact">All updated 2026-09-16 for Valheim 1.0</span>
+      <span class="fact">Updated to 2026-10-08</span>
       <span class="fact">Share: most-picked module = 100%</span>
     </div>
   </header>
@@ -373,42 +374,46 @@
     <span class="chip c-veryeasy">Much easier</span>
     <span class="chip c-hard">Harder</span>
     <span class="chip c-admin">Admin only</span>
+    <span class="chip c-either">Either way</span>
   </div>
 
   <footer class="foot">
-    <p><strong>How to read the share.</strong> The most-downloaded module, AutoStore, is set at 100% and the rest are measured against it. A low share does not mean broken: every module was republished on the same day, so even the last one is only a few days old.</p>
+    <p><strong>How to read the share.</strong> The most-downloaded module, AutoStore, is set at 100% and the rest are measured against it. A low share does not mean broken: ControlCenter, PhoenixPersons and Treesurrection first came out on 2026-09-25, two weeks after the rest, so they start lower.</p>
     <p><strong>If a mod page shows a red compatibility warning, ignore it.</strong> Six of these pages say the mod is "expected to be broken" on our game build. The check is automatic and it is wrong here: the methods it calls missing are ones the mod adds to the game itself while it starts. We installed the flagged parts on the server on 2026-09-20 and they load clean.</p>
     <p><strong>Not on this list.</strong> Durability loss cannot be turned off from the server. That one is a rule inside your own game, so no server mod can reach it.</p>
-    <p>Counts read from Thunderstore on 2026-09-20. Each module name links to its page on hexium.</p>
+    <p>Counts read from Thunderstore on 2026-10-11. Each module name links to its page on hexium.</p>
   </footer>
 </main>
 
 <script>
-  var TOP = 4900;
+  var TOP = 9400;
   var MODS = [
-    ["AutoStore", 4900, "Drops loose items and the items in your pack straight into nearby chests", "veryeasy", "Much easier", "12 settings: what gets picked up and what is left alone, pickup range, the emote that empties your pack into chests, which messages show"],
-    ["ContainerSizes", 3500, "Any chest size you like, and single-item chests can grow forever", "veryeasy", "Much easier", "19 settings: width and height for each chest type, plus a mark that lets a chest grow forever while it holds one item type"],
-    ["LetItFloat", 3400, "Items that sink come back to you in a cargo crate", "safe", "Saves clicks", "1 setting: on or off. Nothing else to tune"],
-    ["ContainerSigns", 3300, "Chests and barrels get a sign that lists what is inside, kept up to date", "safe", "Saves clicks", "14 settings: which chest types get a sign and on which face, how long the list runs, separator, wording"],
-    ["TameAssist", 3300, "Tamed animals follow you anywhere, through portals and into dungeons", "safe", "Saves clicks", "16 settings: which tames take commands, follow distance, dungeon following, taming speed, how long feeding lasts, eating from nearby chests"],
-    ["AutoProcess", 3000, "Smelters, kilns, windmills and shield generators feed themselves from nearby chests, and fermenters can fill and tap themselves", "veryeasy", "Much easier", "13 settings: feed range, how much ore and fuel to leave behind, how near a player must be, capacity and speed, filling and tapping fermenters"],
-    ["PrefabConfigurator", 2700, "Workbench range, fires you can switch off or that never run out, plant growth time. Live for instant mead only", "easy", "Easier", "12 settings: endless or switchable fires, rain damage, indestructible pieces, plant growth and spacing, cart weight"],
-    ["JustSleep", 2500, "One player in bed starts a vote to skip the night", "safe", "Saves clicks", "4 settings: how many players must be in bed, what share must agree, the wording of the prompt"],
-    ["MultiplayerTweaks", 2400, "Network settings that hide lag, and everyone's map pins can stay on", "safe", "Saves clicks", "5 settings: forced map pins, and whether the nearest player owns mobs, ships and things you interact with"],
-    ["AutoDoors", 2000, "Closes doors behind you", "safe", "Saves clicks", "15 settings: how far away you must be, how long a door stays open first, and which door types close"],
-    ["AutoMapTables", 1800, "Map tables fill themselves in with portals, ships and ore deposits", "easy", "Easier", "21 settings: how far a table sees, which pins appear (portals, ships, dungeons, each ore), their icons and labels"],
-    ["SmartDefense", 1800, "Ballistae stop shooting you and your tames, and reload from nearby chests", "safe", "Saves clicks", "12 settings: whether ballistae aim at players or tames, reload range, friendly fire, traps, auto-rearm"],
-    ["Player", 1700, "Endless stamina for chosen jobs, and permanent unlocks such as carry weight", "veryeasy", "Much easier", "13 settings: which jobs get endless stamina, the cart emote, and which items give a permanent perk when sacrificed"],
-    ["PortalProgression", 1700, "Switched off 2026-09-26 \u2014 the Casual portal setting already sends every metal through", "easy", "Easier", "31 settings: which boss unlocks each metal, one entry per metal, plus how close a portal blocks it"],
-    ["Skills", 1600, "Extra effects as your skill levels rise", "easy", "Easier", "16 settings: per-level sliders for rock collapse by pickaxe skill, summon level, summon health and speed, lava tolerance"],
-    ["CreatureLevelUp", 1500, "Monsters can reach higher levels as the world moves on", "hard", "Harder", "9 settings: the level cap, levels gained per boss, star visibility, size scaling, ocean and boss levelling, respawn timing"],
-    ["AutoPortalHub", 1100, "Every portal is wired into one hub", "easy", "Easier", "5 settings: whether the hub builds itself, which portals join by tag, and how new portals are named"],
-    ["WorldOptions", 1100, "Clears the Mistlands mist, sets trader unlocks, shares workbench build range", "easy", "Easier", "19 settings: when the mist clears, map-table view distance, shared build radius, and the keys each trader needs"],
-    ["AdminOptions", 994, "Admins can change build and landscaping limits, and switch on god mode for themselves", "admin", "Admin only", "11 settings: ten admin switches (god mode, endless stamina, free building, no workbench, dungeon building, ground levelling), all off until bound to an emote"],
-    ["Signs", 822, "Signs can show the in-game time, and you can set a default colour", "safe", "Saves clicks", "3 settings: the default sign colour and whether clock signs show the in-game time"],
-    ["Backpack", 726, "A backpack that holds more as you progress", "easy", "Easier", "6 settings: the emote that opens it, starting slots, extra slots per boss killed, weight cap, what happens on death"],
-    ["SuperWishbone", 694, "The wishbone also finds dungeons and vegvisirs", "easy", "Easier", "5 settings: dungeon and vegvisir finding, range, and a text pattern for anything else you want it to find"],
-    ["DropControl", 603, "Changes what monsters drop", "easy", "Easier", "1 setting plus a table file: amount, chance, level and quality per creature"]
+    ["AutoStore", 9400, "Drops loose items and the items in your pack straight into nearby chests", "veryeasy", "Much easier", "12 settings: what gets picked up and what is left alone, pickup range, the emote that empties your pack into chests, which messages show"],
+    ["AutoProcess", 6800, "Smelters, kilns, windmills and shield generators feed themselves from nearby chests, and fermenters can fill and tap themselves", "veryeasy", "Much easier", "13 settings: feed range, how much ore and fuel to leave behind, how near a player must be, capacity and speed, filling and tapping fermenters"],
+    ["ContainerSigns", 6200, "Chests and barrels get a sign that lists what is inside, kept up to date", "safe", "Saves clicks", "14 settings: which chest types get a sign and on which face, how long the list runs, separator, wording"],
+    ["TameAssist", 5900, "Tamed animals follow you anywhere, through portals and into dungeons", "safe", "Saves clicks", "16 settings: which tames take commands, follow distance, dungeon following, taming speed, how long feeding lasts, eating from nearby chests"],
+    ["LetItFloat", 5300, "Items that sink come back to you in a cargo crate", "safe", "Saves clicks", "1 setting: on or off. Nothing else to tune"],
+    ["AutoMapTables", 5200, "Map tables fill themselves in with portals, ships and ore deposits", "easy", "Easier", "21 settings: how far a table sees, which pins appear (portals, ships, dungeons, each ore), their icons and labels"],
+    ["ContainerSizes", 4800, "Any chest size you like, and single-item chests can grow forever", "veryeasy", "Much easier", "19 settings: width and height for each chest type, plus a mark that lets a chest grow forever while it holds one item type"],
+    ["PrefabConfigurator", 4700, "Workbench range, fires you can switch off or that never run out, plant growth time. Live for instant mead only", "easy", "Easier", "12 settings: endless or switchable fires, rain damage, indestructible pieces, plant growth and spacing, cart weight"],
+    ["MultiplayerTweaks", 4700, "Network settings that hide lag, and everyone's map pins can stay on", "safe", "Saves clicks", "5 settings: forced map pins, and whether the nearest player owns mobs, ships and things you interact with"],
+    ["SmartDefense", 4200, "Ballistae stop shooting you and your tames, and reload from nearby chests", "safe", "Saves clicks", "12 settings: whether ballistae aim at players or tames, reload range, friendly fire, traps, auto-rearm"],
+    ["JustSleep", 4200, "One player in bed starts a vote to skip the night", "safe", "Saves clicks", "4 settings: how many players must be in bed, what share must agree, the wording of the prompt"],
+    ["CreatureLevelUp", 3800, "Monsters can reach higher levels as the world moves on", "hard", "Harder", "9 settings: the level cap, levels gained per boss, star visibility, size scaling, ocean and boss levelling, respawn timing"],
+    ["AutoDoors", 3700, "Closes doors behind you", "safe", "Saves clicks", "15 settings: how far away you must be, how long a door stays open first, and which door types close"],
+    ["Skills", 3000, "Extra effects as your skill levels rise", "easy", "Easier", "16 settings: per-level sliders for rock collapse by pickaxe skill, summon level, summon health and speed, lava tolerance"],
+    ["Player", 2700, "Endless stamina for chosen jobs, and permanent unlocks such as carry weight", "veryeasy", "Much easier", "13 settings: which jobs get endless stamina, the cart emote, and which items give a permanent perk when sacrificed"],
+    ["PortalProgression", 2600, "Switched off 2026-09-26 \u2014 the Casual portal setting already sends every metal through", "easy", "Easier", "31 settings: which boss unlocks each metal, one entry per metal, plus how close a portal blocks it"],
+    ["WorldOptions", 2200, "Clears the Mistlands mist, sets trader unlocks, shares workbench build range", "easy", "Easier", "19 settings: when the mist clears, map-table view distance, shared build radius, and the keys each trader needs"],
+    ["AutoPortalHub", 2100, "Every portal is wired into one hub", "easy", "Easier", "5 settings: whether the hub builds itself, which portals join by tag, and how new portals are named"],
+    ["AdminOptions", 1800, "Admins can change build and landscaping limits, and switch on god mode for themselves", "admin", "Admin only", "11 settings: ten admin switches (god mode, endless stamina, free building, no workbench, dungeon building, ground levelling), all off until bound to an emote"],
+    ["Backpack", 1800, "A backpack that holds more as you progress", "easy", "Easier", "6 settings: the emote that opens it, starting slots, extra slots per boss killed, weight cap, what happens on death"],
+    ["Signs", 1700, "Signs can show the in-game time, and you can set a default colour", "safe", "Saves clicks", "3 settings: the default sign colour and whether clock signs show the in-game time"],
+    ["DropControl", 1400, "Changes what monsters drop", "easy", "Easier", "1 setting plus a table file: amount, chance, level and quality per creature"],
+    ["SuperWishbone", 1400, "The wishbone also finds dungeons and vegvisirs", "easy", "Easier", "5 settings: dungeon and vegvisir finding, range, and a text pattern for anything else you want it to find"],
+    ["Treesurrection", 1000, "Tree stumps drop a sapling that grows back into a tree, so forests regrow by themselves", "safe", "Saves clicks", "3 settings: the chance a stump drops a sapling, how long a new sapling cannot be broken, and how fast it grows"],
+    ["ControlCenter", 909, "Sets the game's own world rules from a file: a preset, the world modifiers, and 40 global keys such as carry weight, food use and skill loss", "either", "Either way", "47 settings: a world preset, six world modifiers and 40 global keys. We already set ours on the server's start line, so this would mostly move them"],
+    ["PhoenixPersons", 524, "Brings a friend who died back to their tombstone: you sit beside it, they sit to accept, and they appear next to you", "easy", "Easier", "3 settings: how close you must stand to the tombstone, how long the summon takes, and the emote (Sit by default, which also triggers AutoStore and the sleep vote)"]
   ];
   // Live on the server since 2026-09-22, author's defaults. Read from each module's .cfg.
   var LIVE = {
@@ -503,8 +508,9 @@
   var BASE = "https://valheim.hexium.gg/mods/ArgusMagnus/ServersideQoL_";
   // Thunderstore icon for each module; the URL carries the version it was uploaded with.
   var ICON_V14 = ["AutoStore", "PrefabConfigurator", "AutoMapTables", "Skills", "CreatureLevelUp", "Backpack"];
+  var ICON_V21 = ["ControlCenter", "PhoenixPersons", "Treesurrection"];
   function icon(name, cls) {
-    var v = ICON_V14.indexOf(name) !== -1 ? "2.0.14" : "2.0.11";
+    var v = ICON_V21.indexOf(name) !== -1 ? "2.1.0" : ICON_V14.indexOf(name) !== -1 ? "2.0.14" : "2.0.11";
     return '<img class="' + cls + '" src="https://ccdn.thunderstore.io/live/repository/icons/ArgusMagnus-ServersideQoL_' +
       name + '-' + v + '.png" alt="" width="80" height="80" loading="lazy">';
   }
