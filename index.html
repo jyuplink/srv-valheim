@@ -333,7 +333,7 @@
       </dl>
     </div>
     <div id="livelist" class="livelist"></div>
-    <p class="note">Seven run on the author's default settings. Six are changed: Player (endless stamina for building and farming), PrefabConfigurator (instant mead), AutoProcess (8 m feed range, fermenters fill and tap themselves), TameAssist (hungry tames eat from chests within 8 m), ContainerSizes (four chest types grow forever while they hold one kind of item) and ContainerSigns (a contents sign on the front of chests and barrels). PortalProgression is still installed but switched off, because the Casual portal setting above does its job better. Tap a mod to see every setting.</p>
+    <p class="note">Six run on the author's default settings. Seven are changed: Player (endless stamina for building and farming, permanent perks from sacrificing a Megingjord, crypt key or wishbone), PrefabConfigurator (instant mead), AutoProcess (8 m feed range, one item a second, fermenters fill and tap themselves), Backpack (you keep it when you die), TameAssist (hungry tames eat from chests within 8 m), ContainerSizes (four chest types grow forever while they hold one kind of item) and ContainerSigns (a contents sign on the left side of chests and barrels). PortalProgression is still installed but switched off, because the Casual portal setting above does its job better. Tap a mod to see every setting.</p>
   </section>
 
   <h2 class="picks-h">Pick more</h2>
@@ -426,13 +426,15 @@
       ["Starting slots", "4", ""],
       ["Extra slots per boss", "4", "Counts bosses the world has beaten"],
       ["Weight limit", "none", "Nothing in it counts towards carry weight"],
-      ["On death", "same as inventory", "It goes wherever your inventory goes"]
+      ["On death", "you keep it", "Changed 2026-10-11. Your backpack stays with you when you die; it does not go to your tombstone"]
     ]],
     AutoProcess: ["Smelters, kilns and windmills pull ore and fuel from chests right next to them. Fermenters fill and tap themselves.", [
       ["Feed range", "8 m", "The chest must sit this close. Raised from 4 m on 2026-09-26. Careful: a kiln can now reach a chest of building wood and burn it into coal"],
       ["Only while nobody is within", "4 m", "It feeds when you step away"],
       ["Leaves behind", "1 ore, 1 fuel", "A chest is never emptied completely"],
-      ["Speed and capacity", "vanilla", "It never waits for you, but it is no faster"],
+      ["Speed", "1 second per item", "Changed 2026-10-11. Smelters, blast furnaces, kilns, windmills, spinning wheels and eitr refineries make one item a second. Fuel per bar is normal. Careful: a kiln next to a chest of wood now turns it into coal very fast"],
+      ["Capacity", "vanilla", "Stations hold their normal amount"],
+      ["Messages", "top left, within 64 m", "New 2026-10-11. A small line when a station takes ore or fuel from a chest"],
       ["Fermenters", "fill and tap themselves", "New 2026-10-03. A mead base in a chest within 8 m goes in by itself. When the mead is ready it pops out, and AutoStore puts it in a chest that already holds that mead. Every base is used, none kept back"]
     ]],
     TameAssist: ["Tames and summons keep up with you, through portals and into dungeons, and hungry tames eat from nearby chests.", [
@@ -467,12 +469,15 @@
       ["After being open", "2 s", ""],
       ["Drawbridges, wood shutters", "stay open", "Since the 2026-10-03 update. Every other door and gate still closes"]
     ]],
-    Player: ["Building and farming never run your stamina out.", [
+    Player: ["Building and farming never run your stamina out, and three items give a permanent perk when sacrificed.", [
       ["Building (hammer, hoe)", "endless", "Changed from the default. Stamina still drains, but refills just before it runs out"],
       ["Farming (cultivator)", "endless", "Changed from the default"],
       ["Mining, chopping, swimming, sneaking, over-weight", "normal", "Default"],
       ["Fighting and running", "normal", "Not part of this mod"],
-      ["Permanent perks from sacrifices", "off", "Default"],
+      ["Sacrifice a Megingjord", "carry weight for good", "New 2026-10-11. Put it in an Obliterator; the belt slot is then free"],
+      ["Sacrifice a crypt key", "crypt doors open for good", "New 2026-10-11. Sunken crypt doors open with no key"],
+      ["Sacrifice a wishbone", "sense hidden things for good", "New 2026-10-11. No belt slot needed"],
+      ["Torn spirit sacrifice", "off", "Default. Its wisp could never be sent away"],
       ["Cart emote", "off", "Default"]
     ]],
     ContainerSizes: ["A chest that holds one kind of item never fills up.", [
@@ -482,7 +487,7 @@
       ["Why", "one chest is enough", "The nearest server-only answer to crafting from chests: it shortens the trip, it cannot remove it"]
     ]],
     ContainerSigns: ["Chests and barrels wear a sign listing what is inside.", [
-      ["Sign face", "front", "Wood, Reinforced, Black Metal and Grausten chests, and barrels"],
+      ["Sign face", "left side", "Wood, Reinforced, Black Metal and Grausten chests, and barrels. Moved from the front on 2026-10-10"],
       ["Wardrobe, Obliterator", "no sign", "Left off"],
       ["Lines shown", "3", "Then one line reading Other"],
       ["Watch out", "these are real signs", "The server builds actual sign pieces on your chests"]
